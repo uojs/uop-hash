@@ -15,3 +15,7 @@ var hash = require('uop-hash');
 
 var myHashedFilename = hash('beepboop'); // returns an uint32_t[2] (Number[2])
 ```
+
+# Notes
+
+The code listed in this was adapted from ServUO's UltimaSDK source in [FileIndex.cs:HashFileName function](https://github.com/ServUO/ServUO/blob/6754bb0bfcddaece52ef969dc39fe649a2836c6b/Ultima/FileIndex.cs#L471)
