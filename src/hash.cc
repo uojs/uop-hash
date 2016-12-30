@@ -1,13 +1,12 @@
 #include <nan.h>
 
-using namespace v8;
-
-Handle<Array> LongToArray(uint32_t first, uint32_t second) {
+v8::Handle<v8::Array> LongToArray(uint32_t first, uint32_t second) {
     Nan::EscapableHandleScope scope;
-    Handle<Array> array = Nan::New<v8::Array>();
+    v8::Handle<v8::Array> array = Nan::New<v8::Array>();
 
     array->Set(0, Nan::New(first));
     array->Set(1, Nan::New(second));
+
     return scope.Escape(array);
 }
 
@@ -22,7 +21,7 @@ void Hash(const Nan::FunctionCallbackInfo<v8::Value>& args) {
         return;
     }
 
-    String::Utf8Value str(args[0]->ToString());
+    v8::String::Utf8Value str(args[0]->ToString());
     const char* s = *str;
     uint32_t eax, ecx, edx, ebx, esi, edi, length = str.length();
 
@@ -30,7 +29,7 @@ void Hash(const Nan::FunctionCallbackInfo<v8::Value>& args) {
     ebx = edi = esi = (uint32_t)length + 0xDEADBEEF;
 
     uint32_t i = 0;
-
+    int32_t j = 0;
     for (i = 0; i + 12 < length; i += 12)
     {
         edi = (uint32_t)((s[i + 7] << 24) | (s[i + 6] << 16) | (s[i + 5] << 8) | s[i + 4]) + edi;
@@ -51,9 +50,10 @@ void Hash(const Nan::FunctionCallbackInfo<v8::Value>& args) {
         edi += ebx;
     }
 
-    if (length - i > 0)
+    j = length - i;
+    if (j > 0)
     {
-        switch (length - i)
+        switch (j)
         {
             case 12:
                 esi += (uint32_t)s[i + 11] << 24;
@@ -89,9 +89,6 @@ void Hash(const Nan::FunctionCallbackInfo<v8::Value>& args) {
         edx = (esi ^ ecx) - ((esi >> 28) ^ (esi << 4));
         edi = (edi ^ edx) - ((edx >> 18) ^ (edx << 14));
         eax = (esi ^ edi) - ((edi >> 8) ^ (edi << 24));
-
-        //uint64_t returnValue = ((uint64_t)edi << 32) | eax;
-
         args.GetReturnValue().Set(LongToArray(edi, eax));
         return;
     }
