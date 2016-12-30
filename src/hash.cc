@@ -2,6 +2,15 @@
 
 using namespace v8;
 
+Handle<Array> LongToArray(uint32_t first, uint32_t second) {
+    Nan::EscapableHandleScope scope;
+    Handle<Array> array = Nan::New<v8::Array>();
+
+    array->Set(0, Nan::New(first));
+    array->Set(1, Nan::New(second));
+    return scope.Escape(array);
+}
+
 void Hash(const Nan::FunctionCallbackInfo<v8::Value>& args) {
     if (args.Length() != 1) {
         Nan::ThrowTypeError("requires one argument");
@@ -81,15 +90,13 @@ void Hash(const Nan::FunctionCallbackInfo<v8::Value>& args) {
         edi = (edi ^ edx) - ((edx >> 18) ^ (edx << 14));
         eax = (esi ^ edi) - ((edi >> 8) ^ (edi << 24));
 
-        uint64_t returnValue = ((uint64_t)edi << 32) | eax;
-        args.GetReturnValue().Set(Nan::New<v8::Number>(returnValue));
-        //args.GetReturnValue().Set(std::to_string(returnValue).c_str());
+        //uint64_t returnValue = ((uint64_t)edi << 32) | eax;
+
+        args.GetReturnValue().Set(LongToArray(edi, eax));
         return;
     }
 
-    uint64_t returnValue = ((uint64_t)esi << 32) | eax;
-    args.GetReturnValue().Set(Nan::New<v8::Number>(returnValue));
-    //args.GetReturnValue().Set(std::to_string(returnValue).c_str());
+    args.GetReturnValue().Set(LongToArray(esi, eax));
 }
 
 void Init(v8::Local<v8::Object> exports) {

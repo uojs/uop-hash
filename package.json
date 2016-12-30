@@ -1,6 +1,6 @@
 {
   "name": "uop-hash",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "calculates the uop filename hash",
   "main": "index.js",
   "repository": "https://github.com/kevinhikaruevans/uop-hash.git",
