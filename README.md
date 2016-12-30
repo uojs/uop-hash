@@ -13,5 +13,5 @@ Since just 53-bits is the maximum supported precision by javascript with integer
 ```javascript
 var hash = require('uop-hash');
 
-var myHashedFilename = hash('beepboop'); // returns an int[2]
+var myHashedFilename = hash('beepboop'); // returns an uint32_t[2] (Number[2])
 ```
