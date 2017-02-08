@@ -16,7 +16,7 @@ environment:
 install:
   - where npm
   - where node
-  - echo $env:APPVEYOR_REPO_NAME
+  - echo %APPVEYOR_REPO_NAME%
   - node --version
   - npm --version
   - set PATH=%APPDATA%\npm;%PATH%
