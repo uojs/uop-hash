@@ -16,12 +16,11 @@ environment:
 install:
   - where npm
   - where node
-  - echo %APPVEYOR_REPO_NAME%
   - node --version
   - npm --version
   - set PATH=%APPDATA%\npm;%PATH%
   - ps: Install-Product node $env:nodejs_version $env:platform
   - npm install -g node-gyp node-pre-gyp node-pre-gyp-github
-  - ps: if($env:APPVEYOR_REPO_NAME.Equals('uojs/master')) { node-pre-gyp package; node-pre-gyp-github publish --release }
+  - ps: node-pre-gyp package; node-pre-gyp-github publish --release
 
 build: off
