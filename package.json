@@ -3,8 +3,10 @@
   "version": "1.0.4",
   "description": "calculates the uop filename hash",
   "main": "index.js",
-  "repository": "https://github.com/kevinhikaruevans/uop-hash.git",
-  "author": "Kevin Evans <kevans@thriftbooks.com>",
+  "repository": {
+      "url": "https://github.com/uojs/uop-hash.git"
+  },
+  "author": "Kevin Evans <evans.kevinh@gmail.com>",
   "keywords": [
     "uop",
     "hash",
@@ -15,9 +17,19 @@
   "license": "MIT",
   "dependencies": {
     "bindings": "^1.2.1",
-    "nan": "^2.5.0"
+    "nan": "^2.5.0",
+    "node-pre-gyp": "^0.6.33",
+    "node-pre-gyp-github": "^1.3.1"
   },
   "scripts": {
-    "install": "node-gyp rebuild"
+    "preinstall": "npm install node-pre-gyp",
+    "install-old": "node-gyp rebuild",
+    "install": "node-pre-gyp install --fallback-to-build"
+  },
+  "binary": {
+    "module_name": "hash",
+    "module_path": "./lib/binding/",
+    "host": "https://github.com/uojs/uop-hash/releases/download/",
+    "remote_path": "{version}"
   }
 }
