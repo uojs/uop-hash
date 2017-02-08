@@ -1,0 +1,25 @@
+addons:
+  apt:
+    packages:
+    - g++-4.8
+
+before_install:
+  - $CXX --version
+
+sudo: false
+os:
+  - linux
+  - osx
+
+language: node_js
+node_js:
+  - "6"
+  - "7"
+
+script:
+  - where npm
+  - where node
+  - node --version
+  - npm --version
+  - npm install
+  - npm run publish-release-binaries
