@@ -19,6 +19,7 @@ install:
   - node --version
   - npm --version
   - ps: Install-Product node $env:nodejs_version $env:platform
+  - npm install
   - npm run publish-release-binaries
 
 build: off
