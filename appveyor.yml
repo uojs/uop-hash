@@ -12,6 +12,14 @@ environment:
     platform: x64
   - nodejs_version: "6"
     platform: x86
+  - nodejs_version: "6.9.1"
+    platform: x64
+  - nodejs_version: "6.9.1"
+    platform: x86
+  - nodejs_version: "Stable"
+    platform: x64
+  - nodejs_version: "Stable"
+    platform: x86
 
 install:
   - where npm
