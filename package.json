@@ -1,6 +1,6 @@
 {
   "name": "uop-hash",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "calculates the uop filename hash",
   "main": "index.js",
   "repository": {
@@ -16,7 +16,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "bindings": "^1.2.1",
     "nan": "^2.5.0",
     "node-pre-gyp": "^0.6.33",
     "node-pre-gyp-github": "^1.3.1"
